@@ -1,0 +1,202 @@
+button {
+  margin: 0 10px;
+  height: 38px;
+  width: 120px;
+  background-color: rgb(16, 86, 104);
+  border-width: 0;
+  border-radius: 10px;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+.body {
+  min-height: 1000px;
+  padding: 0 10px;
+}
+/*Nested*/
+.nested-parent {
+  align-self: center;
+  background-color: gray;
+  height: 200px;
+  width: 200px;
+  .box-1 {
+    width: 50px;
+    height: 50px;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .box-1-nested {
+      width: 30px;
+      height: 30px;
+      background-color: red;
+    }
+  }
+  .box-2 {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    margin: 20px;
+  }
+}
+/*Nested Property*/
+.nested-property {
+  font: {
+    size: 2em;
+    family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    weight: bold;
+    style: italic;
+  }
+  margin: auto {
+    bottom: 10px;
+    top: 100px;
+  }
+}
+/*Parent Selector*/
+.ps {
+  height: 250px;
+  width: 500px;
+  border: 1px solid green;
+
+  &-text {
+    color: orange;
+    font-size: 22px;
+  }
+  //   .text-& {
+  //     color: red;
+  //   }
+}
+/*Variable*/
+.variable {
+  $size: 250px;
+  $bg: orange;
+  width: $size;
+  height: $size;
+  background-color: $bg;
+}
+/*Interpolation*/
+.interpolation {
+  $width: width;
+  $value: 350px;
+  height: 350px;
+  #{$width}: $value;
+  background-color: #{"green"};
+}
+/*Mixin and Include*/
+.mixin-include {
+  height: 500px;
+  width: 500px;
+  border: 1px green solid;
+  @mixin square($size, $bg) {
+    height: $size;
+    width: $size;
+    background-color: $bg;
+  }
+  @mixin circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: orange;
+  }
+
+  .mi-1 {
+    @include square(250px, red);
+  }
+  .mi-2 {
+    @include circle;
+  }
+}
+/*Extend*/
+//Place holder
+%box {
+  height: 500px;
+  width: 500px;
+  border: 1px green solid;
+}
+.extend {
+  @extend %box;
+  &-child {
+    height: 150px;
+    width: 150px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+  &-child-2 {
+    @extend .extend-child;
+    border-radius: 10px;
+  }
+}
+/*If Else Statement*/
+.ies {
+  @extend %box;
+  @mixin pattern($size, $bg, $isSquare: false) {
+    @if $isSquare == true {
+      width: $size;
+      height: $size;
+      border-radius: $size/10;
+    } @else {
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+    }
+    background-color: $bg;
+  }
+
+  &-square {
+    @include pattern(250px, green, true);
+  }
+  &-circle {
+    @include pattern(250px, red);
+  }
+}
+
+/*List Each*/
+%common {
+  height: 20;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+  background-color: #00e5ff;
+}
+$sizes: 20, 50, 70, 100;
+@each $s in $sizes {
+  .div-#{$s} {
+    width: $s * 5px;
+    @extend %common;
+  }
+}
+/*Map*/
+$maps: (
+  20: 20px,
+  50: 50px,
+  70: 70px,
+  100: 100px,
+);
+
+@each $key, $value in $maps {
+  .div-m-#{$key} {
+    width: $value * 5;
+    @extend %common;
+    background-color: green;
+    color: white;
+  }
+}
+/*For loop*/
+@for $i from 1 through 4 {
+  .for-#{$i} {
+    opacity: $i * 0.1;
+  }
+}
+/*While loop*/
+$i: 10;
+@while $i > 6 {
+  .while-#{$i} {
+    opacity: $i * 0.1;
+  }
+  $i: $i - 1;
+}
