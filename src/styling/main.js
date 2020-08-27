@@ -1,4 +1,5 @@
 import React from "react";
+import main from "./scss/main.scss";
 import Nested from "./Nested";
 import NestedProperty from "./NestedProperty";
 import ParentSelector from "./ParentSelector";
@@ -32,7 +33,9 @@ export default function Main() {
     <div className="div-container">
       <div className="button-container">
         {options.map((item, index) => (
-          <button onClick={onClick.bind(this, index)}>{item.name}</button>
+          <button key={index} onClick={onClick.bind(this, index)}>
+            {item.name}
+          </button>
         ))}
       </div>
       <div className="body">{selected}</div>

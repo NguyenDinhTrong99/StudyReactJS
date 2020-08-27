@@ -1,5 +1,4 @@
 import React from "react";
-import main from "./scss/main.scss";
 
 export default function Nested() {
   return (

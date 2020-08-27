@@ -200,3 +200,41 @@ $i: 10;
   }
   $i: $i - 1;
 }
+
+/*List Method*/
+
+$list: 1px, 2px, 3px;
+/*append(arr, newValue)*/
+$newList: append($list, 4px);
+/*nth(arr, index)*/
+$item: nth($list, 1);
+/*set-nth(arr, index, newValue)*/
+$newSetNth: set-nth($list, 2, 5px);
+/*length(arr)*/
+$size: length($list);
+
+/*Map Method*/
+$maps: (
+  fontSize: 20px,
+  fontWeight: bold,
+  fontStyle: italic,
+);
+$maps1: (
+  fontSize: 30px,
+  fontWeight: normal,
+  fontStyle: italic,
+);
+/*Get all value in map, map-values(maps)*/
+@debug map-values($maps);
+/*Find with key map-get($maps, key)*/
+@debug map-get($maps, fontSize);
+/*Remove value by key map-remove(maps, key)*/
+@debug map-remove($maps, fontSize);
+/*Add new value to map map-merge(maps, maps1 or ($key, $value) )*/
+@debug map-merge(
+  $maps,
+  (
+    color: white,
+  )
+);
+@debug map-merge($maps, $maps1);
